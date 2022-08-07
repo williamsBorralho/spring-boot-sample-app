@@ -15,7 +15,7 @@ phases:
     - echo Building the Docker image...
     - echo Recuperando permissão
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 624721256567.dkr.ecr.us-east-1.amazonaws.com
-    - docker build -t $APPLICATION_NAME:latest .
+    - docker build -t $APPLICATION_NAME:$IMAGE_TAG .
     - docker tag $APPLICATION_NAME:$IMAGE_TAG $REPOSITORY_URI:$IMAGE_TAG
   post_build: 
     commands: 
