@@ -22,8 +22,7 @@ phases:
     - echo Build completed on `date` 
     - echo pushing to repo
     - docker push 624721256567.dkr.ecr.us-east-1.amazonaws.com/spring-boot-sample-app:latest
-    - echo Writing image definitions file... 
-    - printf '[{"name":"SpringBootAppContainer", "imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+    - echo Writing image definitions file...
 artifacts:
   files:
     - imagedefinitions.json
