@@ -8,7 +8,7 @@ phases:
     - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
     - IMAGE_TAG=${COMMIT_HASH:=latest}
     - APPLICATION_NAME=spring-boot-sample-app
-    - REPOSITORY_URI=316041349485.dkr.ecr.us-east-1.amazonaws.com/$APPLICATION_NAME
+    - REPOSITORY_URI=624721256567.dkr.ecr.us-east-1.amazonaws.com/$APPLICATION_NAME
   build: 
     commands: 
     - echo Build started on `date` 
