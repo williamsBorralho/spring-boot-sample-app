@@ -8,7 +8,7 @@ phases:
     - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
     - IMAGE_TAG=${COMMIT_HASH:=latest}
     - APPLICATION_NAME=spring-boot-sample-app
-    - REPOSITORY_URI=624721256567.dkr.ecr.us-east-1.amazonaws.com/spring-boot-sample-app
+    - REPOSITORY_URI=624721256567.dkr.ecr.us-east-1.amazonaws.com/$APPLICATION_NAME
   build: 
     commands: 
     - echo Build started on `date` 
@@ -16,12 +16,12 @@ phases:
     - echo Recuperando permissão
     - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 624721256567.dkr.ecr.us-east-1.amazonaws.com
     - docker build -t $APPLICATION_NAME:latest .
-    - docker tag spring-boot-sample-app:latest 624721256567.dkr.ecr.us-east-1.amazonaws.com/spring-boot-sample-app:latest
+    - docker tag $APPLICATION_NAME:$IMAGE_TAG
   post_build: 
     commands: 
     - echo Build completed on `date` 
     - echo pushing to repo
-    - docker push 624721256567.dkr.ecr.us-east-1.amazonaws.com/spring-boot-sample-app:latest
+    - docker push $REPOSITORY_URI:$IMAGE_TAG
     - echo Writing image definitions file...
     - printf '[{"name":"SpringBootAppContainer", "imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
